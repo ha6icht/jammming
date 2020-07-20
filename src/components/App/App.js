@@ -56,7 +56,6 @@ class App extends React.Component{
 
       ]
     }
-    //Spotify.getAccessToken();
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
@@ -99,15 +98,23 @@ class App extends React.Component{
     })
   }
   savePlaylist(){
-    const uri = this.state.playlistTracks;
-    const trackUris = uri;
+    let trackURIs = this.state.playlistTracks.map(track => {
+      return track.uri;
+    });
+    Spotify.savePlaylist(this.state.playListName, trackURIs).then((results) => {
+        this.setState({
+            searchResults: [],
+            playListName: 'New Playlist',
+            playlistTracks: []
+        });
+      });
   }
   search(searchTerm){
-    //let spotify = Spotify.getAccessToken();
-    //Spotify.setAccessToken();
-    //console.log(searchTerm);
-    let spotify = Spotify.search(searchTerm);
-    console.log(spotify);
+    Spotify.search(searchTerm).then((results) => {
+      if (results) this.setState({ 
+        searchResults: results 
+      });
+    })
   }
   render(){
     return (
