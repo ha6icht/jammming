@@ -35,8 +35,8 @@ let Spotify = {
                 console.log(response);
                 return response.json();
             }).then(jsonResponse =>{
-                if(jsonResponse.tracks){
-                    return jsonResponse.tracks.map(track =>(
+                if(jsonResponse.tracks.items){
+                    return jsonResponse.tracks.items.map(track =>(
                         {   
                             id: track.items.id,
                             name: track.name,
@@ -68,7 +68,7 @@ let Spotify = {
             }).then(jsonResponse =>{
                 if(jsonResponse.id) userId = jsonResponse.id;
             }).then(() => {
-                fetch(`https://api.spotify.com/v1/users/${userId}/playlists`,{
+                fetch(`https://cors-anywhere.herokuapp.com/https://api.spotify.com/v1/users/${userId}/playlists`,{
                 method: 'POST',
                 headers: headers,
                 body: JSON.stringify({name: playlistName}),
@@ -78,7 +78,7 @@ let Spotify = {
                 }).then(jsonResponse => {
                 playlistId = jsonResponse.id;
                 }).then(() => {
-                fetch(`https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`,{
+                fetch(`https://cors-anywhere.herokuapp.com/https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`,{
                 method: 'POST',
                 headers: headers,
                 body: JSON.stringify({uris: trackURIs}),
