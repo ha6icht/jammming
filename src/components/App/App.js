@@ -63,7 +63,7 @@ class App extends React.Component{
     this.search = this.search.bind(this);
   }
   componentDidMount(){
-    if(this.state.ok)Spotify.getAccessToken();
+    if(this.state.ok) Spotify.getAccessToken();
   }
   componentDidUpdate(){
     this.setState({
