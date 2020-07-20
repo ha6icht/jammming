@@ -60,7 +60,7 @@ let Spotify = {
         };
         let userId = '';
         let playlistId = '';
-        fetch(`https://cors-anywhere.herokuapp.com/
+        return fetch(`https://cors-anywhere.herokuapp.com/
             https://api.spotify.com/v1/me`, {
             headers: headers
             }).then(response =>{
