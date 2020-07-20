@@ -3,11 +3,13 @@ import './App.css';
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
+import Spotify from '../../util/Spotify';
 
 class App extends React.Component{
   constructor(props){
     super(props);
     this.state = {
+      ok: true,
       searchResults: [{
         name: 'Yellow Submarine',
         artist: 'The Beatles',
@@ -54,11 +56,20 @@ class App extends React.Component{
 
       ]
     }
+    //Spotify.getAccessToken();
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
     this.savePlaylist = this.savePlaylist.bind(this);
     this.search = this.search.bind(this);
+  }
+  componentDidMount(){
+    if(this.state.ok)Spotify.getAccessToken();
+  }
+  componentDidUpdate(){
+    this.setState({
+      ok: false
+    })
   }
   addTrack(track){
     if(this.state.playlistTracks.find
@@ -68,8 +79,9 @@ class App extends React.Component{
       playlistTracks.push(track);
       this.setState({
         playlistTracks: playlistTracks
-      })
-    }      
+      });
+    }
+    console.log(this.state.playlistTracks);      
   }
   removeTrack(track){
     if(this.state.playlistTracks.find
@@ -91,7 +103,11 @@ class App extends React.Component{
     const trackUris = uri;
   }
   search(searchTerm){
-    console.log(searchTerm);
+    //let spotify = Spotify.getAccessToken();
+    //Spotify.setAccessToken();
+    //console.log(searchTerm);
+    let spotify = Spotify.search(searchTerm);
+    console.log(spotify);
   }
   render(){
     return (
