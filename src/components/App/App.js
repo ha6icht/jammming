@@ -10,6 +10,7 @@ class App extends React.Component{
     super(props);
     this.state = {
       ok: true,
+      update: true,
       searchResults: [{
         name: 'Yellow Submarine',
         artist: 'The Beatles',
@@ -66,7 +67,7 @@ class App extends React.Component{
     if(this.state.ok) Spotify.getAccessToken();
   }
   componentDidUpdate(){
-    this.setState({
+    if(this.state.update)this.setState({
       ok: false
     })
   }
@@ -101,15 +102,17 @@ class App extends React.Component{
     let trackURIs = this.state.playlistTracks.map(track => {
       return track.uri;
     });
-    Spotify.savePlaylist(this.state.playListName, trackURIs).then((results) => {
-        this.setState({
-            searchResults: [],
-            playListName: 'New Playlist',
-            playlistTracks: []
-        });
-      });
+    Spotify.savePlaylist(this.state.playlistName, trackURIs);
+    /*this.setState({
+        searchResults: [],
+        playListName: 'New Playlist',
+        playlistTracks: []
+    });*/
   }
   search(searchTerm){
+    this.setState({
+      update: false
+    })
     Spotify.search(searchTerm).then((results) => {
       if (results) this.setState({ 
         searchResults: results 
