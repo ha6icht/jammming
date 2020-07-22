@@ -15,7 +15,7 @@ class Track extends React.Component{
     }
     addTrack(){
         let track = this.props.track;
-        console.log(track);
+        //console.log(track);
         this.props.onAdd(this.props.track);
         //this.props.onAdd = this.props.track;
         //e.preventDefault();
