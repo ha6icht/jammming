@@ -3,7 +3,8 @@ const CLIENT_ID_BASE64 = "MGJjMWZkMjA4N2FiNDNmNWI3N2U0MTg2NDY1YTJlYzI=";
 const CLIENT_SECRET = "f7b4a87ae933404fad791c523e8a1350";
 const CLIENT_SECRET_BASE64 = "ZjdiNGE4N2FlOTMzNDA0ZmFkNzkxYzUyM2U4YTEzNTA=";
 const CLIENT_ID_SECRET_BASE64 ="MGJjMWZkMjA4N2FiNDNmNWI3N2U0MTg2NDY1YTJlYzJmN2I0YTg3YWU5MzM0MDRmYWQ3OTFjNTIzZThhMTM1MA==";
-const REDIRECT_URI = "http://localhost:3000/";
+//const REDIRECT_URI = "http://localhost:3000/";
+const REDIRECT_URI = "https://beispiele.grizzley.ch/jammming/";
 
 let accessToken = '';
 let Spotify = {
